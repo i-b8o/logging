@@ -1,4 +1,4 @@
-module logging
+module github.com/i-b8o/logging
 
 go 1.18
 
