@@ -23,10 +23,7 @@ func NewTelegramHook(appName, userName, authToken, targetID string) (*TelegramHo
 	return NewTelegramHookWithClient(appName, userName, authToken, targetID, client)
 }
 
-// NewTelegramHook creates a new instance of a hook targeting the
-// Telegram API with custom http.Client.
 func NewTelegramHookWithClient(appName, username, token, chatID string, client *http.Client) (*TelegramHook, error) {
-	// https://api.telegram.org/bot1497194583:AAEmn1sr0WDJSzRD_nZKas-DqOS1BYsgpW8/sendMessage?chat_id=1382735620&text=
 	apiEndpoint := fmt.Sprintf(
 		"https://api.telegram.org/bot%s:%s/sendMessage?chat_id=%s&text=",
 		username, token, chatID,
@@ -41,8 +38,6 @@ func NewTelegramHookWithClient(appName, username, token, chatID string, client *
 	return &h, nil
 }
 
-// createMessage crafts an HTML-formatted message to send to the
-// Telegram API.
 func (hook *TelegramHook) createMessage(entry *logrus.Entry) string {
 	var msg string
 
@@ -77,7 +72,6 @@ func (hook *TelegramHook) Fire(entry *logrus.Entry) error {
 			Timeout:   60 * time.Second,
 			KeepAlive: 30 * time.Second,
 		}).Dial,
-		// ABSURDLY large keys, for ABSURDLY dumb devices like raspberry.
 		TLSHandshakeTimeout: 60 * time.Second,
 	}
 	c := &http.Client{

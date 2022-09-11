@@ -48,3 +48,13 @@ func GetLogger(level string) Logger {
 
 	return instance
 }
+
+func GetTelegramLogger(level, appName, userName, authToken, targetID string) {
+	l := GetLogger(level)
+	hook, err := NewTelegramHook(appName, userName, authToken, targetID)
+	if err != nil {
+		l.Error("Unable to connect to local syslog daemon")
+	} else {
+		l.Logger.AddHook(hook)
+	}
+}
