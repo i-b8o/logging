@@ -49,7 +49,7 @@ func GetLogger(level string) Logger {
 	return instance
 }
 
-func GetTelegramLogger(level, appName, userName, authToken, targetID string) {
+func GetTelegramLogger(level, appName, userName, authToken, targetID string) Logger {
 	l := GetLogger(level)
 	hook, err := NewTelegramHook(appName, userName, authToken, targetID)
 	if err != nil {
@@ -57,4 +57,5 @@ func GetTelegramLogger(level, appName, userName, authToken, targetID string) {
 	} else {
 		l.Logger.AddHook(hook)
 	}
+	return l
 }
