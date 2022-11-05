@@ -53,7 +53,7 @@ func GetTelegramLogger(level, appName, userName, authToken, targetID string) Log
 	l := GetLogger(level)
 	hook, err := NewTelegramHook(appName, userName, authToken, targetID)
 	if err != nil {
-		l.Error("Unable to connect to the telegram hook")
+		l.Error("Unable to connect to a telegram hook")
 	} else {
 		l.Logger.AddHook(hook)
 	}
